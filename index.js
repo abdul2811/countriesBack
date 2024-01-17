@@ -7,7 +7,13 @@ require('dotenv').config();
 const app = express();
 
 app.use(express.json())
-app.use(cors())
+
+const corsOptions = {
+    origin: 'https://countriesforall.netlify.app/', // Update with your frontend URL
+    optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 
 app.get('/api/countries', (request, response) => {
     axios.get('https://studies.cs.helsinki.fi/restcountries/api/all')
